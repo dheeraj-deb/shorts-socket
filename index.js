@@ -39,11 +39,11 @@ io.on("connection", (socket) => {
         }
     });
 
-    socket.on("follow-user", (data) => {
-        const { followerId } = data
-        const user = activeUsers.find((user) => user.userId === followerId)
+    socket.on("send-notification", (data) => {
+        const { userTwo } = data
+        const user = activeUsers.find((user) => user.userId === userTwo)
         if (user) {
-            io.to(user.socketId).emit("followed-notification", data)
+            io.to(user.socketId).emit("receive-notification", data)
         }
     })
 });
